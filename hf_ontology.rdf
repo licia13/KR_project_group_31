@@ -23,6 +23,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#ContextualFactor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#ContextualFactor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#factor"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#LatentError -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#LatentError">
@@ -51,6 +59,20 @@
     
 
 
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#factor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#factor"/>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfKnowledge -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfKnowledge">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#personalFactor"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#lapse -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#lapse">
@@ -70,6 +92,22 @@
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#organizationalProcess -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#organizationalProcess"/>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#personalFactor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#personalFactor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#factor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#pressure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#pressure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#ContextualFactor"/>
+    </owl:Class>
     
 
 
