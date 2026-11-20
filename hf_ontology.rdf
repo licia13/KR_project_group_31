@@ -117,7 +117,9 @@
 
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#humanevent -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#humanevent"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#humanevent">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#event"/>
+    </owl:Class>
     
 
 
