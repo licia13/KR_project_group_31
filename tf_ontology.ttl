@@ -1,0 +1,473 @@
+@prefix :     <http://www.semanticweb.org/tech_ontology#> .
+@prefix tech: <http://www.semanticweb.org/tech_ontology#> .
+@prefix hf:   <http://www.semanticweb.org/hf_ontology#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://www.semanticweb.org/tech_ontology> rdf:type owl:Ontology ;
+    rdfs:label "Aviation Technical Factors Ontology"@en ;
+    rdfs:comment "Technical causation module aligned to hf_ontology and NTSB/ADREP classifications."@en ;
+    owl:versionInfo "2.0.0" .
+
+skos:altLabel rdf:type owl:AnnotationProperty .
+
+# Shared Alignment (fits to hf_ontology.rdf)
+
+hf:event                 rdf:type owl:Class .
+hf:error                 rdf:type owl:Class .
+hf:activeError           rdf:type owl:Class ; rdfs:subClassOf hf:error .
+hf:factor                rdf:type owl:Class .
+hf:personalFactor        rdf:type owl:Class ; rdfs:subClassOf hf:factor .
+hf:ContextualFactor      rdf:type owl:Class ; rdfs:subClassOf hf:factor .
+hf:organizationalProcess rdf:type owl:Class .
+hf:humanevent            rdf:type owl:Class ; rdfs:subClassOf hf:event .
+hf:fatigue               rdf:type owl:Class ; rdfs:subClassOf hf:personalFactor .
+hf:dirtyDozenEvent       rdf:type owl:Class ; rdfs:subClassOf hf:event .
+hf:organizationalRootEvent rdf:type owl:Class ; rdfs:subClassOf hf:event .
+
+hf:causedBY rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
+    owl:inverseOf hf:causes .
+
+hf:causes rdf:type owl:ObjectProperty , owl:TransitiveProperty .
+
+hf:directCause rdf:type owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
+    rdfs:subPropertyOf hf:causedBY .
+
+hf:hasActiveError rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf hf:directCause ;
+    rdfs:domain hf:event ;
+    rdfs:range hf:activeError .
+
+
+# Technical Causal & Structural Object Properties
+
+
+tech:hasTechnicalFailure rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf hf:directCause ;
+    rdfs:domain hf:event ;
+    rdfs:range tech:TechnicalFailure .
+
+tech:hasLatentCondition rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf hf:directCause ;
+    rdfs:domain [ rdf:type owl:Class ;
+                  owl:unionOf ( tech:TechnicalFailure hf:activeError tech:LatentTechnicalCondition ) ] ;
+    rdfs:range tech:LatentTechnicalCondition .
+
+tech:hasEnvironmentalFactor rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf hf:directCause ;
+    rdfs:domain [ rdf:type owl:Class ;
+                  owl:unionOf ( hf:event tech:TechnicalFailure hf:activeError ) ] ;
+    rdfs:range hf:ContextualFactor .
+
+tech:hasOrganisationalCause rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf hf:directCause ;
+    rdfs:domain [ rdf:type owl:Class ;
+                  owl:unionOf ( tech:LatentTechnicalCondition tech:TechnicalFailure ) ] ;
+    rdfs:range hf:organizationalProcess .
+
+# Cross-pathway properties (causation directions)
+tech:triggersError rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf hf:causes ;
+    rdfs:comment "Forward causation: a technical failure triggers or induces an active human error."@en ;
+    rdfs:domain tech:TechnicalFailure ;
+    rdfs:range hf:activeError .
+
+tech:inducedByError rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf hf:directCause ;
+    rdfs:comment "Backward causation: a technical failure or non-operation is induced by a human error."@en ;
+    rdfs:domain tech:TechnicalFailure ;
+    rdfs:range hf:error .
+
+# System mapping (simple property -> safe for cardinality restrictions)
+tech:affectsSystem rdf:type owl:ObjectProperty ;
+    rdfs:domain [ rdf:type owl:Class ;
+                  owl:unionOf ( tech:TechnicalFailure tech:LatentTechnicalCondition ) ] ;
+    rdfs:range tech:AircraftSystemOrComponent .
+
+# Property chain: Event --hasTechnicalFailure--> Failure --affectsSystem--> System
+tech:involvesAffectedSystem rdf:type owl:ObjectProperty ;
+    owl:propertyChainAxiom ( tech:hasTechnicalFailure tech:affectsSystem ) ;
+    rdfs:domain hf:event ;
+    rdfs:range tech:AircraftSystemOrComponent .
+
+# Parthood hierarchy
+tech:hasComponent rdf:type owl:ObjectProperty , owl:TransitiveProperty ;
+    owl:inverseOf tech:isComponentOf ;
+    rdfs:domain tech:AircraftSystemOrComponent ;
+    rdfs:range tech:AircraftSystemOrComponent .
+
+tech:isComponentOf rdf:type owl:ObjectProperty , owl:TransitiveProperty .
+
+tech:directComponent rdf:type owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
+    rdfs:subPropertyOf tech:hasComponent .
+
+# Modifiers & Metadata
+tech:hasFailureMode rdf:type owl:ObjectProperty ;
+    rdfs:domain [ rdf:type owl:Class ;
+                  owl:unionOf ( tech:TechnicalFailure tech:LatentTechnicalCondition ) ] ;
+    rdfs:range tech:FailureMode .
+
+tech:hasDamageLevel rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain hf:event ;
+    rdfs:range tech:DamageLevel .
+
+tech:hasOccurrenceType rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain hf:event ;
+    rdfs:range tech:OccurrenceType .
+
+tech:hasCICTTCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain hf:event ;
+    rdfs:range tech:CICTTCategory .
+
+
+# Value Partitions (Nominals / Enumerations)
+
+
+tech:DamageLevel rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:oneOf ( tech:NoDamage tech:MinorDamage tech:SubstantialDamage tech:Destroyed )
+    ] .
+
+tech:NoDamage          rdf:type owl:NamedIndividual , tech:DamageLevel .
+tech:MinorDamage       rdf:type owl:NamedIndividual , tech:DamageLevel .
+tech:SubstantialDamage rdf:type owl:NamedIndividual , tech:DamageLevel .
+tech:Destroyed         rdf:type owl:NamedIndividual , tech:DamageLevel .
+
+tech:OccurrenceType rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:oneOf ( tech:Accident tech:Incident )
+    ] .
+
+tech:Accident rdf:type owl:NamedIndividual , tech:OccurrenceType .
+tech:Incident rdf:type owl:NamedIndividual , tech:OccurrenceType .
+
+tech:CICTTCategory rdf:type owl:Class .
+tech:SCF-PP rdf:type owl:Class ; rdfs:subClassOf tech:CICTTCategory ; skos:altLabel "System/Component Failure (Powerplant)"@en .
+tech:SCF-NP rdf:type owl:Class ; rdfs:subClassOf tech:CICTTCategory ; skos:altLabel "System/Component Failure (Non-Powerplant)"@en .
+tech:BIRD   rdf:type owl:Class ; rdfs:subClassOf tech:CICTTCategory ; skos:altLabel "Birdstrike"@en .
+tech:FUEL   rdf:type owl:Class ; rdfs:subClassOf tech:CICTTCategory ; skos:altLabel "Fuel Related"@en .
+tech:ARC    rdf:type owl:Class ; rdfs:subClassOf tech:CICTTCategory ; skos:altLabel "Abnormal Runway Contact"@en .
+tech:LOC-I  rdf:type owl:Class ; rdfs:subClassOf tech:CICTTCategory ; skos:altLabel "Loss of Control - Inflight"@en .
+tech:TURB   rdf:type owl:Class ; rdfs:subClassOf tech:CICTTCategory ; skos:altLabel "Turbulence Encounter"@en .
+
+
+# Aircraft Systems & Components(fit to NTSB Reports)
+
+
+tech:AircraftSystemOrComponent rdf:type owl:Class .
+tech:AircraftSystem            rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystemOrComponent .
+tech:AircraftComponent         rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystemOrComponent .
+
+# 6 Core Systems
+tech:PowerplantSystem         rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystem .
+tech:FlightControlSystem      rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystem .
+tech:LandingGearSystem        rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystem .
+tech:AirframeStructure        rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystem .
+tech:IceProtectionSystem      rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystem .
+tech:FuelAndLubricationSystem rdf:type owl:Class ; rdfs:subClassOf tech:AircraftSystem .
+
+# Components
+tech:TurbineEngine       rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:ReciprocatingEngine rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:FanBlade            rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:Carburetor          rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:CarburetorHeatValve rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:LubricationSystem   rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:FlapSystem          rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:MainLandingGear     rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:FuselageStructure   rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:WingStructure       rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+tech:EngineNacelle       rdf:type owl:Class ; rdfs:subClassOf tech:AircraftComponent .
+
+
+# Failure Modes (NTSB/ADREP modifiers)
+
+
+tech:FailureMode rdf:type owl:Class .
+
+tech:FatigueWearCorrosion rdf:type owl:Class ; rdfs:subClassOf tech:FailureMode ; skos:altLabel "Fatigue/wear/corrosion"@en .
+tech:Fractured            rdf:type owl:Class ; rdfs:subClassOf tech:FailureMode .
+tech:Separated            rdf:type owl:Class ; rdfs:subClassOf tech:FailureMode ; skos:altLabel "Detached"@en .
+tech:NotUsedOrOperated    rdf:type owl:Class ; rdfs:subClassOf tech:FailureMode ; skos:altLabel "Not used/operated"@en .
+tech:Degraded             rdf:type owl:Class ; rdfs:subClassOf tech:FailureMode .
+tech:Malfunctioning       rdf:type owl:Class ; rdfs:subClassOf tech:FailureMode .
+tech:Asymmetric           rdf:type owl:Class ; rdfs:subClassOf tech:FailureMode .
+
+
+# Technical Failures, Latent Conditions, Context & Org Causes
+
+
+tech:TechnicalFailure rdf:type owl:Class .
+
+tech:PowerplantMalfunction rdf:type owl:Class ; rdfs:subClassOf tech:TechnicalFailure .
+tech:FanBladeFracture      rdf:type owl:Class ; rdfs:subClassOf tech:PowerplantMalfunction .
+tech:ThrustLoss            rdf:type owl:Class ; rdfs:subClassOf tech:PowerplantMalfunction .
+tech:StructuralFailure     rdf:type owl:Class ; rdfs:subClassOf tech:TechnicalFailure .
+tech:FlightControlAnomaly  rdf:type owl:Class ; rdfs:subClassOf tech:TechnicalFailure .
+tech:SystemNonOperation    rdf:type owl:Class ; rdfs:subClassOf tech:TechnicalFailure ;
+    rdfs:comment "A functional system was not operated or configured when required (e.g., carb heat off, gear not lowered)."@en .
+
+tech:LatentTechnicalCondition rdf:type owl:Class .
+
+tech:FatigueCrack             rdf:type owl:Class ; rdfs:subClassOf tech:LatentTechnicalCondition .
+tech:LubricationBreakdown     rdf:type owl:Class ; rdfs:subClassOf tech:LatentTechnicalCondition .
+tech:DesignOrCertificationFlaw rdf:type owl:Class ; rdfs:subClassOf tech:LatentTechnicalCondition .
+tech:LackOfDefences           rdf:type owl:Class ; rdfs:subClassOf tech:LatentTechnicalCondition .
+
+# Environmental / External Technical Factors (aligned under hf:ContextualFactor)
+tech:EnvironmentalTechnicalFactor rdf:type owl:Class ; rdfs:subClassOf hf:ContextualFactor .
+tech:BirdStrike                   rdf:type owl:Class ; rdfs:subClassOf tech:EnvironmentalTechnicalFactor .
+tech:IcingCondition               rdf:type owl:Class ; rdfs:subClassOf tech:EnvironmentalTechnicalFactor .
+tech:ConvectiveTurbulence         rdf:type owl:Class ; rdfs:subClassOf tech:EnvironmentalTechnicalFactor .
+tech:LowVisibilityFog             rdf:type owl:Class ; rdfs:subClassOf tech:EnvironmentalTechnicalFactor .
+
+# Technical Organisational Processes (aligned under hf:organizationalProcess)
+tech:InadequateMaintenanceSchedule rdf:type owl:Class ; rdfs:subClassOf hf:organizationalProcess .
+tech:InadequateDesignOrCertification rdf:type owl:Class ; rdfs:subClassOf hf:organizationalProcess .
+tech:InadequateOperationalGuidance rdf:type owl:Class ; rdfs:subClassOf hf:organizationalProcess .
+
+
+# Complex Defined Classes
+
+
+# 1. TechnicalPathEvent
+tech:TechnicalPathEvent rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            hf:event
+            [ rdf:type owl:Restriction ;
+              owl:onProperty tech:hasTechnicalFailure ;
+              owl:someValuesFrom tech:TechnicalFailure ]
+        )
+    ] .
+
+# 2. MixedEvent (bridge bewteen HF and Tech)
+tech:MixedEvent rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf ( hf:humanevent tech:TechnicalPathEvent )
+    ] .
+
+# 3. PowerplantFailure (Inferred from affected system)
+tech:PowerplantFailure rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            tech:TechnicalFailure
+            [ rdf:type owl:Restriction ;
+              owl:onProperty tech:affectsSystem ;
+              owl:someValuesFrom [
+                  rdf:type owl:Class ;
+                  owl:unionOf (
+                      tech:PowerplantSystem
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty tech:isComponentOf ;
+                        owl:someValuesFrom tech:PowerplantSystem ]
+                  )
+              ] ]
+        )
+    ] .
+
+# 4. MultiSystemFailure (Qualified cardinality >= 2 on simple property)
+tech:MultiSystemFailure rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            tech:TechnicalFailure
+            [ rdf:type owl:Restriction ;
+              owl:onProperty tech:affectsSystem ;
+              owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+              owl:onClass tech:AircraftSystemOrComponent ]
+        )
+    ] .
+
+# 5. FatigueRelatedEvent (transitive causal chain + union)
+tech:FatigueRelatedEvent rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            hf:event
+            [ rdf:type owl:Restriction ;
+              owl:onProperty hf:causedBY ;
+              owl:someValuesFrom [
+                  rdf:type owl:Class ;
+                  owl:unionOf (
+                      tech:FatigueCrack
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty tech:hasFailureMode ;
+                        owl:someValuesFrom tech:FatigueWearCorrosion ]
+                  )
+              ] ]
+        )
+    ] .
+
+# 6. OrganisationallyRootedTechnicalEvent (Multi-hop transitive inference)
+tech:OrganisationallyRootedTechnicalEvent rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            hf:event
+            [ rdf:type owl:Restriction ;
+              owl:onProperty tech:hasTechnicalFailure ;
+              owl:someValuesFrom [
+                  rdf:type owl:Class ;
+                  owl:intersectionOf (
+                      tech:TechnicalFailure
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty hf:causedBY ;
+                        owl:someValuesFrom hf:organizationalProcess ]
+                  )
+              ] ]
+        )
+    ] .
+
+# 7. EnvironmentallyTriggeredTechnicalEvent
+tech:EnvironmentallyTriggeredTechnicalEvent rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            hf:event
+            [ rdf:type owl:Restriction ;
+              owl:onProperty tech:hasTechnicalFailure ;
+              owl:someValuesFrom [
+                  rdf:type owl:Class ;
+                  owl:intersectionOf (
+                      tech:TechnicalFailure
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty hf:causedBY ;
+                        owl:someValuesFrom tech:EnvironmentalTechnicalFactor ]
+                  )
+              ] ]
+        )
+    ] .
+
+# 8. HumanTechnicalInterfaceEvent (Functional system not operated due to human error)
+tech:HumanTechnicalInterfaceEvent rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            hf:event
+            [ rdf:type owl:Restriction ;
+              owl:onProperty tech:hasTechnicalFailure ;
+              owl:someValuesFrom [
+                  rdf:type owl:Class ;
+                  owl:intersectionOf (
+                      tech:SystemNonOperation
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty tech:inducedByError ;
+                        owl:someValuesFrom hf:error ]
+                  )
+              ] ]
+        )
+    ] .
+
+
+# Disjointness Axioms
+
+
+[] rdf:type owl:AllDisjointClasses ;
+   owl:members (
+       hf:event
+       tech:TechnicalFailure
+       tech:LatentTechnicalCondition
+       hf:error
+       hf:factor
+       hf:organizationalProcess
+       tech:AircraftSystemOrComponent
+       tech:FailureMode
+       tech:CICTTCategory
+       tech:DamageLevel
+       tech:OccurrenceType
+   ) .
+
+[] rdf:type owl:AllDisjointClasses ;
+   owl:members (
+       tech:PowerplantSystem
+       tech:FlightControlSystem
+       tech:LandingGearSystem
+       tech:AirframeStructure
+       tech:IceProtectionSystem
+       tech:FuelAndLubricationSystem
+   ) .
+
+[] rdf:type owl:AllDifferent ;
+   owl:distinctMembers ( tech:NoDamage tech:MinorDamage tech:SubstantialDamage tech:Destroyed ) .
+
+[] rdf:type owl:AllDifferent ;
+   owl:distinctMembers ( tech:Accident tech:Incident ) .
+
+
+# ABox Examples: Instantiating 3 NTSB reports
+
+
+# Case 1: ENG09IA002 (Delta 55, B777 Fan Blade Fracture)
+tech:event_ENG09IA002 rdf:type hf:event ;
+    tech:hasOccurrenceType tech:Incident ;
+    tech:hasDamageLevel tech:MinorDamage ;
+    tech:hasTechnicalFailure tech:fail_ENG09IA002_bladeFracture .
+
+tech:fail_ENG09IA002_bladeFracture rdf:type tech:FanBladeFracture ;
+    tech:affectsSystem tech:comp_Trent895_fanBlade ;
+    tech:hasFailureMode tech:mode_ENG09IA002_fatigue ;
+    tech:hasLatentCondition tech:latent_ENG09IA002_crack , tech:latent_ENG09IA002_lubeBreakdown .
+
+tech:sys_B777_powerplant rdf:type tech:PowerplantSystem .
+tech:comp_Trent895_fanBlade rdf:type tech:FanBlade ;
+    tech:isComponentOf tech:sys_B777_powerplant .
+tech:mode_ENG09IA002_fatigue rdf:type tech:FatigueWearCorrosion .
+
+tech:latent_ENG09IA002_crack rdf:type tech:FatigueCrack .
+tech:latent_ENG09IA002_lubeBreakdown rdf:type tech:LubricationBreakdown ;
+    tech:hasOrganisationalCause tech:org_ENG09IA002_lubeSchedule .
+
+tech:org_ENG09IA002_lubeSchedule rdf:type tech:InadequateMaintenanceSchedule .
+
+# Case 2: DCA09MA026 (US Airways 1549, A320 Birdstrike & Ditching)
+tech:event_DCA09MA026 rdf:type hf:event ;
+    tech:hasOccurrenceType tech:Accident ;
+    tech:hasDamageLevel tech:SubstantialDamage ;
+    tech:hasTechnicalFailure tech:fail_DCA09MA026_dualThrustLoss , tech:fail_DCA09MA026_fuselageDamage .
+
+tech:fail_DCA09MA026_dualThrustLoss rdf:type tech:ThrustLoss ;
+    tech:affectsSystem tech:comp_A320_eng1 , tech:comp_A320_eng2 ;
+    tech:hasEnvironmentalFactor tech:env_DCA09MA026_birdstrike .
+
+tech:comp_A320_eng1 rdf:type tech:TurbineEngine ; tech:isComponentOf tech:sys_A320_powerplant .
+tech:comp_A320_eng2 rdf:type tech:TurbineEngine ; tech:isComponentOf tech:sys_A320_powerplant .
+tech:sys_A320_powerplant rdf:type tech:PowerplantSystem .
+[] rdf:type owl:AllDifferent ; owl:distinctMembers ( tech:comp_A320_eng1 tech:comp_A320_eng2 ) .
+
+tech:env_DCA09MA026_birdstrike rdf:type tech:BirdStrike .
+
+tech:fail_DCA09MA026_fuselageDamage rdf:type tech:StructuralFailure ;
+    tech:affectsSystem tech:comp_A320_fuselage ;
+    tech:hasOrganisationalCause tech:org_DCA09MA026_faaCert .
+
+tech:comp_A320_fuselage rdf:type tech:FuselageStructure .
+tech:org_DCA09MA026_faaCert rdf:type tech:InadequateDesignOrCertification .
+
+# Case 3: CEN09MA142 (Empire 8284, ATR 42 Icing + Flap Anomaly + Crew Error)
+tech:event_CEN09MA142 rdf:type hf:event ;
+    tech:hasOccurrenceType tech:Accident ;
+    tech:hasDamageLevel tech:SubstantialDamage ;
+    tech:hasTechnicalFailure tech:fail_CEN09MA142_flapAnomaly ;
+    hf:hasActiveError tech:err_CEN09MA142_sopFailure .
+
+tech:fail_CEN09MA142_flapAnomaly rdf:type tech:FlightControlAnomaly ;
+    tech:affectsSystem tech:comp_ATR42_flaps ;
+    tech:hasEnvironmentalFactor tech:env_CEN09MA142_icing ;
+    tech:triggersError tech:err_CEN09MA142_sopFailure .
+
+tech:comp_ATR42_flaps rdf:type tech:FlapSystem .
+tech:env_CEN09MA142_icing rdf:type tech:IcingCondition .
+
+tech:err_CEN09MA142_sopFailure rdf:type hf:activeError ;
+    hf:directCause tech:fac_CEN09MA142_fatigue .
+
+tech:fac_CEN09MA142_fatigue rdf:type hf:fatigue .
