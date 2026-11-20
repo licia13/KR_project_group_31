@@ -23,17 +23,37 @@
     
 
 
-    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#Error -->
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#LatentError -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#Error">
-        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#Event"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#LatentError">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#Event -->
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#activeError -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#Event"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#activeError">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#error -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#event -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#event"/>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#organizationalProcess -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#organizationalProcess"/>
 </rdf:RDF>
 
 
