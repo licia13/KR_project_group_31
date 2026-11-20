@@ -85,6 +85,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#distraction -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#distraction">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#personalFactor"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#error -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
@@ -100,6 +108,14 @@
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#factor -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#factor"/>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#fatigue -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#fatigue">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#personalFactor"/>
+    </owl:Class>
     
 
 
@@ -122,10 +138,26 @@
     
 
 
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfCommunication -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfCommunication">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#ContextualFactor"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfKnowledge -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfKnowledge">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#personalFactor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfTeamwork -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfTeamwork">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#ContextualFactor"/>
     </owl:Class>
     
 
@@ -172,6 +204,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#slip">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#stress -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#stress">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#personalFactor"/>
     </owl:Class>
     
 
