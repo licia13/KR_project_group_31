@@ -27,6 +27,10 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hf_ontology#causedBY">
         <owl:inverseOf rdf:resource="http://www.semanticweb.org/hf_ontology#causes"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#hasActiveError"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#directCause"/>
+        </owl:propertyChainAxiom>
     </owl:ObjectProperty>
     
 
@@ -69,6 +73,16 @@
     <!-- http://www.semanticweb.org/hf_ontology#ContextualFactor -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#ContextualFactor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#factor"/>
+                    <owl:Class>
+                        <owl:complementOf rdf:resource="http://www.semanticweb.org/hf_ontology#personalFactor"/>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#factor"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/hf_ontology#personalFactor"/>
     </owl:Class>
@@ -78,7 +92,23 @@
     <!-- http://www.semanticweb.org/hf_ontology#LatentError -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#LatentError">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#error"/>
+                    <owl:Class>
+                        <owl:complementOf rdf:resource="http://www.semanticweb.org/hf_ontology#activeError"/>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#error"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#directCause"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hf_ontology#organizationalProcess"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/hf_ontology#activeError"/>
     </owl:Class>
     
@@ -171,6 +201,20 @@
     <!-- http://www.semanticweb.org/hf_ontology#event -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#event">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#causedBY"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#error"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#factor"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#organizationalProcess"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#hasActiveError"/>
@@ -402,7 +446,9 @@
 
     <!-- http://www.semanticweb.org/hf_ontology#ae1 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ae1"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ae1">
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#f1"/>
+    </owl:NamedIndividual>
     
 
 
@@ -411,6 +457,14 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ev1">
         <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#event"/>
         <hf_ontology:hasActiveError rdf:resource="http://www.semanticweb.org/hf_ontology#ae1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#f1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#f1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#fatigue"/>
     </owl:NamedIndividual>
     
 
