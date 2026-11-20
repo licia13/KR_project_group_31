@@ -7,9 +7,7 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:hf_ontology="http://www.semanticweb.org/hf_ontology#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/hf_ontology">
-        <owl:imports rdf:resource="file:/Users/liciatauriello/Desktop/kr_project/hf_ontology.owl"/>
-    </owl:Ontology>
+    <owl:Ontology rdf:about="http://www.semanticweb.org/hf_ontology"/>
     
 
 
@@ -28,6 +26,7 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hf_ontology#causedBY">
         <owl:inverseOf rdf:resource="http://www.semanticweb.org/hf_ontology#causes"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
     </owl:ObjectProperty>
     
 
@@ -42,7 +41,6 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hf_ontology#directCause">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/hf_ontology#causedBY"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
     </owl:ObjectProperty>
     
 
@@ -72,6 +70,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#ContextualFactor">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#factor"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/hf_ontology#personalFactor"/>
     </owl:Class>
     
 
@@ -154,7 +153,18 @@
 
     <!-- http://www.semanticweb.org/hf_ontology#error -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#error"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#error">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#lapse"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#mistake"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#slip"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#violation"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
     
 
 
@@ -274,6 +284,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#mistake">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#error"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/hf_ontology#violation"/>
     </owl:Class>
     
 
@@ -419,6 +430,23 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#event"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#factor"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#organizationalProcess"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#lapse"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#mistake"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#slip"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#violation"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#lapse"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#mistake"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#violation"/>
         </owl:members>
     </rdf:Description>
 </rdf:RDF>
