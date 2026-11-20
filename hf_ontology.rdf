@@ -51,9 +51,41 @@
     
 
 
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#lapse -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#lapse">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#mistake -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#mistake">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#organizationalProcess -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#organizationalProcess"/>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#slip -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#slip">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#violation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#violation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+    </owl:Class>
 </rdf:RDF>
 
 
