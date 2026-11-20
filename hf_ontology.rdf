@@ -9,6 +9,31 @@
     <owl:Ontology rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology">
         <owl:imports rdf:resource="file:/Users/liciatauriello/Desktop/kr_project/hf_ontology.owl"/>
     </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#Error -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#Error">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#Event -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#Event"/>
 </rdf:RDF>
 
 
