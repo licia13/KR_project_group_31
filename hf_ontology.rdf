@@ -15,6 +15,39 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#causedBY -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#causedBY"/>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#directCause -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#directCause">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#causedBY"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#hasActiveError -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#hasActiveError">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#directCause"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
