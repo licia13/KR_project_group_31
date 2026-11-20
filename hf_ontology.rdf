@@ -93,19 +93,7 @@
 
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#event -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#event">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#event"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#hasActiveError"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#activeError"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#event"/>
     
 
 
@@ -118,6 +106,17 @@
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#humanevent -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#humanevent">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#event"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#hasActiveError"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#activeError"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#event"/>
     </owl:Class>
     
