@@ -35,6 +35,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#LatentError">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#error"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/liciatauriello/hf_ontology#activeError"/>
     </owl:Class>
     
 
