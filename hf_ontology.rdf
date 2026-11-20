@@ -102,6 +102,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#humanevent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#humanevent"/>
+    
+
+
     <!-- http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfKnowledge -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/liciatauriello/hf_ontology#lackOfKnowledge">
