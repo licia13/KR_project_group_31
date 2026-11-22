@@ -22,9 +22,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/hf_ontology#causedBY -->
+    <!-- http://www.semanticweb.org/hf_ontology#causedBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hf_ontology#causedBY">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hf_ontology#causedBy">
         <owl:inverseOf rdf:resource="http://www.semanticweb.org/hf_ontology#causes"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <owl:propertyChainAxiom rdf:parseType="Collection">
@@ -44,7 +44,7 @@
     <!-- http://www.semanticweb.org/hf_ontology#directCause -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hf_ontology#directCause">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/hf_ontology#causedBY"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/hf_ontology#causedBy"/>
     </owl:ObjectProperty>
     
 
@@ -70,9 +70,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/hf_ontology#ContextualFactor -->
+    <!-- http://www.semanticweb.org/hf_ontology#contextualFactor -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#ContextualFactor">
+    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#contextualFactor">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -89,9 +89,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/hf_ontology#LatentError -->
+    <!-- http://www.semanticweb.org/hf_ontology#latentError -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#LatentError">
+    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#latentError">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -138,7 +138,7 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#event"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#causedBY"/>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#causedBy"/>
                         <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hf_ontology#dirtyDozenFactor"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
@@ -203,7 +203,7 @@
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#event">
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#causedBY"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#causedBy"/>
                 <owl:allValuesFrom>
                     <owl:Class>
                         <owl:unionOf rdf:parseType="Collection">
@@ -241,9 +241,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/hf_ontology#humanevent -->
+    <!-- http://www.semanticweb.org/hf_ontology#humanEvent -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#humanevent">
+    <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#humanEvent">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -263,7 +263,7 @@
     <!-- http://www.semanticweb.org/hf_ontology#inadequateNorms -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#inadequateNorms">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#ContextualFactor"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
     </owl:Class>
     
 
@@ -287,7 +287,7 @@
     <!-- http://www.semanticweb.org/hf_ontology#lackOfCommunication -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#lackOfCommunication">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#ContextualFactor"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
     </owl:Class>
     
 
@@ -303,7 +303,7 @@
     <!-- http://www.semanticweb.org/hf_ontology#lackOfParts -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#lackOfParts">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#ContextualFactor"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
     </owl:Class>
     
 
@@ -311,7 +311,7 @@
     <!-- http://www.semanticweb.org/hf_ontology#lackOfTeamwork -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#lackOfTeamwork">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#ContextualFactor"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
     </owl:Class>
     
 
@@ -366,7 +366,7 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#event"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#causedBY"/>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/hf_ontology#causedBy"/>
                         <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hf_ontology#organizationalProcess"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
@@ -387,7 +387,7 @@
     <!-- http://www.semanticweb.org/hf_ontology#pressure -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/hf_ontology#pressure">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#ContextualFactor"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
     </owl:Class>
     
 
@@ -447,6 +447,7 @@
     <!-- http://www.semanticweb.org/hf_ontology#ae1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ae1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#activeError"/>
         <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#f1"/>
     </owl:NamedIndividual>
     
@@ -465,6 +466,143 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#f1">
         <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#fatigue"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#ev3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ev3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#event"/>
+        <hf_ontology:hasActiveError rdf:resource="http://www.semanticweb.org/hf_ontology#ae3a"/>
+        <hf_ontology:hasActiveError rdf:resource="http://www.semanticweb.org/hf_ontology#ae3b"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#ae3a -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ae3a">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#activeError"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#slip"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#lk3"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#pr3"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#lc3"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#lk3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#lk3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#lackOfKnowledge"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#pr3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#pr3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#pressure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#lc3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#lc3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#ae3b -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ae3b">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#activeError"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#mistake"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#la3"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#cv3"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#la3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#la3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#lackOfAwareness"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#cv3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#cv3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#ev4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ev4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#event"/>
+        <hf_ontology:hasActiveError rdf:resource="http://www.semanticweb.org/hf_ontology#ae4"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#ae4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#ae4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#activeError"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#mistake"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#la4"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#pr4"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#cw4"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#le4"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#la4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#la4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#lackOfAwareness"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#pr4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#pr4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#pressure"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#cw4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#cw4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#contextualFactor"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#le4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#le4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#latentError"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#mistake"/>
+        <hf_ontology:directCause rdf:resource="http://www.semanticweb.org/hf_ontology#op4"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/hf_ontology#op4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hf_ontology#op4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hf_ontology#organizationalProcess"/>
     </owl:NamedIndividual>
     
 
@@ -492,14 +630,6 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#lapse"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#mistake"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#slip"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#violation"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#lapse"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#mistake"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/hf_ontology#violation"/>
         </owl:members>
     </rdf:Description>
